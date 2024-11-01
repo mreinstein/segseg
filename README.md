@@ -41,9 +41,17 @@ segseg(isect, [ 1, 1 ], [ 5, 3 ],  [ 3, 3 ], [ 5, 6 ], ESPILON)  // returns true
 ```
 
 
-## Node compatibility
+### segment-point intersection
 
-This is a pure es module, and requires node v12+ to run. However if you're using a popular bundler such as rollup, webpack, etc. This should be compatible with most frontend setups too.
+This module also exposes a simple boolean test indicating if a point intersects a segment:
+
+```javascript
+import { isPointOnSegment } from 'segseg'
+
+//                             point           segment       
+//                           ┌──────┐  ┌───────────────────┐
+console.log(isPointOnSegment([ 20, 0], [ -10, 0 ], [ 10, 0 ]))  // false
+```
 
 
 ## Credits

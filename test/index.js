@@ -1,5 +1,6 @@
-import t      from 'assert';
-import segseg from '../index.js';
+import t                    from 'assert'
+import segseg               from '../index.js'
+import { isPointOnSegment } from '../index.js'
 
 
 const out = [ 0, 0 ] // the output vector
@@ -140,3 +141,7 @@ t.deepEqual(segseg(out, [ 1, 1 ], [ 5, 3 ],  [ 3, 3 ], [ 5, 6 ], EPSILON), true)
 
 
 t.equal(segseg(out, [ 1, 1 ], [ 5, 3 ], [ 3, 3 ], [ 5, 6 ]), false)
+
+
+t.equal(isPointOnSegment([ 0, 0], [ -10, 0 ], [ 10, 0 ]), true)
+t.equal(isPointOnSegment([ 20, 0], [ -10, 0 ], [ 10, 0 ]), false)

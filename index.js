@@ -1,4 +1,4 @@
-import segpoint from './segpoint.js'
+import dist from 'point-to-segment-2d'
 
 
 const DONT_INTERSECT = 0
@@ -92,29 +92,39 @@ export default function segseg (out, p1, p2, p3, p4, epsilon=0) {
     return result
 
   // handle colinear cases and when a line segment endpoint lies on the other segment
-  if (segpoint(p1, p3, p4, epsilon)) {
+  if (isPointOnSegment(p1, p3, p4, epsilon)) {
     out[0] = p1[0]
     out[1] = p1[1]
     return true
   }
 
-  if (segpoint(p2, p3, p4, epsilon)) {
+  if (isPointOnSegment(p2, p3, p4, epsilon)) {
     out[0] = p2[0]
     out[1] = p2[1]
     return true
   }
 
-  if (segpoint(p3, p1, p2, epsilon)) {
+  if (isPointOnSegment(p3, p1, p2, epsilon)) {
     out[0] = p3[0]
     out[1] = p3[1]
     return true
   }
 
-  if (segpoint(p4, p1, p2, epsilon)) {
+  if (isPointOnSegment(p4, p1, p2, epsilon)) {
     out[0] = p4[0]
     out[1] = p4[1]
     return true
   }
 
   return false
+}
+
+
+// p - point
+// t0 - start point of segment
+// t1 - end point of segment
+// epsilon - maximum distance from the segment that a point can still be considered on the segment
+// return boolean indicating if p is on the segment
+export function isPointOnSegment (p, t0, t1, epsilon=0) {
+    return dist(p, t0, t1) <= epsilon
 }
